@@ -6,7 +6,12 @@ export class ServerApp {
     console.log("Server started!!!");
     
     Cron.start("*/1 * * * * *", () => {
-        new CheckService().start("http://localhost:3000/posts")
+        
+      const url = "http://localhost:3000/posts";
+      new CheckService(
+        () => console.log(url,"Servicio is OK!" ),
+        (error) => console.log("Service is Loss", error)
+        ).start(url);
     });
     
 
